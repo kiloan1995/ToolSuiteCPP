@@ -108,6 +108,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>$(CoreLibraryDependencies);wsock32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -131,11 +132,13 @@
     <ClCompile Include="Core\Core.cpp" />
     <ClCompile Include="Core\HTTP\Private\Socket.cpp" />
     <ClCompile Include="Core\HTTP\Private\URL.cpp" />
+    <ClCompile Include="Core\Insights\Private\Logger.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Core.h" />
     <ClInclude Include="Core\HTTP\Public\Socket.h" />
     <ClInclude Include="Core\HTTP\Public\URL.h" />
+    <ClInclude Include="Core\Insights\Public\Logger.h" />
     <ClInclude Include="Core\Math\Public\Math.h" />
     <ClInclude Include="Core\Math\Public\Vector2.h" />
     <ClInclude Include="Core\Math\Public\Vector3.h" />

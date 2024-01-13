@@ -6,6 +6,11 @@
 
 class USocket
 {
+public:
+	int32_t TestServer();
 	int32_t Init();
 	int32_t Quit();
+
+private:
+	const uint16_t SERVER_PORT = 9909;
 };

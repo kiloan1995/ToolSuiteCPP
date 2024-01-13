@@ -1,5 +1,6 @@
 #include <string>
 #include "../Public/URL.h"
+#include "../../Insights/Public/Logger.h"
 #include <iostream>
 
 FURL::FURL(const std::string& Link)
@@ -23,6 +24,6 @@ FURL::FURL(const std::string& Link)
 	{
 		positions.push_back(SegPos);
 		SegPos = Link.find(Sub, SegPos + 1);
-		std::cout << std::to_string(SegPos) + "\n";
+		ULogger::Log(SegPos);
 	}
 }

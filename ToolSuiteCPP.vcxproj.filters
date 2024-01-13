@@ -27,6 +27,9 @@
     <ClCompile Include="Core\HTTP\Private\Socket.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Core\Insights\Private\Logger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Core.h">
@@ -48,6 +51,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\HTTP\Public\Socket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Insights\Public\Logger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,93 +1,84 @@
-#include <stdio.h> /* printf, sprintf */
-#include <stdlib.h> /* exit */
-//#include <unistd.h> /* read, write, close */
-#include <string.h> /* memcpy, memset */
-//#include <sys/socket.h> /* socket, connect */
-//#include <netinet/in.h> /* struct sockaddr_in, struct sockaddr */
-//#include <netdb.h> /* struct hostent, gethostbyname */
-#include <iostream>
+
+
+#include <winsock.h> // Has to be linked in Solution->Properties->Linker->Input->AdditionalDependencies->wsock32.lib
 #include "../public/Socket.h"
-#include <WinSock2.h>
+#include "../../Insights/Public/Logger.h"
+
+#include <iostream>
+
+struct sockaddr_in Server;
+struct fd_set FD_Readers, FD_Writers, FD_Exceptions; // File descriptors
+
+int32_t USocket::TestServer()
+{
+	// https://www.youtube.com/watch?v=W9b9SaGXIjA&list=PLhnN2F9NiVmAMn9iGB_Rtjs3aGef3GpSm&index=2&ab_channel=VartetaLearningPlatform
+
+	int Result = EXIT_SUCCESS;
+	// Initialize the WSA variables (when using windows)
+	WSADATA wsa;
+	if (const int Result = WSAStartup(MAKEWORD(2, 2), &wsa) > -1)
+	{
+		ULogger::Log("WSAStartup", Result, "started successfully");
+	}
+	else
+	{
+		ULogger::Log("WSAStartup failed");
+	}
+
+	// Initialize Socket
+
+	// 1.arg ->AF_INET is for UDP, TCP, etc.
+	// 3. arg -> AF_UNSPEC, can be other protocoll like TCP, UDP, etc.
+	const SOCKET Socket = socket(AF_INET, SOCK_STREAM, AF_UNSPEC);
+	if (Socket < 1)
+	{
+		ULogger::Log("Socket not opened!");
+	}
+	else
+	{
+		ULogger::Log("Socket", Socket, "opened successfully");
+	}
+	// Initialize the environment for sockaddr structure
+
+	Server.sin_family = AF_INET;
+	Server.sin_port = htons(SERVER_PORT);
+	Server.sin_addr.s_addr = INADDR_ANY; // Here we are assigning the address of the local machine (Own System IP Adress)
+	//Server.sin_addr.s_addr = inet_addr("127.0.0.1"); // Alternative. Will convert to the correct byteorder
+	memset(&(Server.sin_zero), 0, 8);
+
+
+	// Bind the socket tot the local port
+	Result = bind(Socket, (sockaddr*)&Server, sizeof(sockaddr));
+	if (Result < 0)
+	{
+		ULogger::Log("Failed to bind to locale port");
+		return EXIT_FAILURE;
+	}
+	else
+	{
+		ULogger::Log("Successfully bound to local port");
+	}
+	// Listen the request from client (queues the requests)
+	Result = listen(Socket, 5); // backlog says how many requests at a time the Server can pull (how many requests can be in the active queue).
+	if (Result < 0)
+	{
+		ULogger::Log("Failed to start 'listen to local port'");
+		return EXIT_FAILURE;
+	}
+	else
+	{
+		ULogger::Log("Started listening to local port");
+	}
+	// Keep waiting for new requests and process as per the request
+	return EXIT_SUCCESS;
+}
 
 int32_t USocket::Init()
 {
-	/* first what are we going to send and where are we going to send it? */
-	int portno = 80;
-	char* host = "api.somesite.com";
-	char* message_fmt = "POST /apikey=%s&command=%s HTTP/1.0\r\n\r\n";
-
-	struct hostent* server;
-	struct sockaddr_in serv_addr;
-	int sockfd, bytes, sent, received, total;
-	char message[1024], response[4096];
-
-	if (argc < 3) { puts("Parameters: <apikey> <command>"); exit(0); }
-
-	/* fill in the parameters */
-	sprintf(message, message_fmt, argv[1], argv[2]);
-	printf("Request:\n%s\n", message);
-
-	/* create the socket */
-	sockfd = socket(AF_INET, SOCK_STREAM, 0);
-	if (sockfd < 0) return -1 //error("ERROR opening socket");
-
-	/* lookup the ip address */
-	server = gethostbyname(host);
-	if (server == NULL) return -1 //error("ERROR no such host");
-
-	/* fill in the structure */
-	memset(&serv_addr, 0, sizeof(serv_addr));
-	serv_addr.sin_family = AF_INET;
-	serv_addr.sin_port = htons(portno);
-	memcpy(&serv_addr.sin_addr.s_addr, server->h_addr, server->h_length);
-
-	/* connect the socket */
-	if (connect(sockfd, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) < 0)
-		error("ERROR connecting");
-
-	/* send the request */
-	total = strlen(message);
-	sent = 0;
-	do {
-		bytes = write(sockfd, message + sent, total - sent);
-		if (bytes < 0)
-			error("ERROR writing message to socket");
-		if (bytes == 0)
-			break;
-		sent += bytes;
-	} while (sent < total);
-
-	/* receive the response */
-	memset(response, 0, sizeof(response));
-	total = sizeof(response) - 1;
-	received = 0;
-	do {
-		bytes = read(sockfd, response + received, total - received);
-		if (bytes < 0)
-			error("ERROR reading response from socket");
-		if (bytes == 0)
-			break;
-		received += bytes;
-	} while (received < total);
-
-	/*
-	 * if the number of received bytes is the total size of the
-	 * array then we have run out of space to store the response
-	 * and it hasn't all arrived yet - so that's a bad thing
-	 */
-	if (received == total)
-		error("ERROR storing complete response from socket");
-
-	/* close the socket */
-	close(sockfd);
-
-	/* process response */
-	printf("Response:\n%s\n", response);
-
 	return 0;
 }
 
 int32_t USocket::Quit()
 {
-
+	return 0;
 }

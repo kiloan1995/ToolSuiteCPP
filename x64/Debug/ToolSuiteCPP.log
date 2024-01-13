@@ -1,29 +1,3 @@
-﻿  App.cpp
-  Core.cpp
-  Socket.cpp
-  URL.cpp
-C:\Arbeit\repos\VisualStudio\ToolSuiteCPP\Core\HTTP\Private\Socket.cpp(16,13): error C2440: 'initializing': cannot convert from 'const char [17]' to 'char *'
-  C:\Arbeit\repos\VisualStudio\ToolSuiteCPP\Core\HTTP\Private\Socket.cpp(16,13):
-  Conversion from string literal loses const qualifier (see /Zc:strictStrings)
-  
-C:\Arbeit\repos\VisualStudio\ToolSuiteCPP\Core\HTTP\Private\Socket.cpp(17,20): error C2440: 'initializing': cannot convert from 'const char [40]' to 'char *'
-  C:\Arbeit\repos\VisualStudio\ToolSuiteCPP\Core\HTTP\Private\Socket.cpp(17,20):
-  Conversion from string literal loses const qualifier (see /Zc:strictStrings)
-  
-C:\Arbeit\repos\VisualStudio\ToolSuiteCPP\Core\HTTP\Private\Socket.cpp(24,6): error C2065: 'argc': undeclared identifier
-C:\Arbeit\repos\VisualStudio\ToolSuiteCPP\Core\HTTP\Private\Socket.cpp(27,32): error C2065: 'argv': undeclared identifier
-C:\Arbeit\repos\VisualStudio\ToolSuiteCPP\Core\HTTP\Private\Socket.cpp(27,41): error C2065: 'argv': undeclared identifier
-C:\Arbeit\repos\VisualStudio\ToolSuiteCPP\Core\HTTP\Private\Socket.cpp(31,17): warning C4244: '=': conversion from 'SOCKET' to 'int', possible loss of data
-C:\Arbeit\repos\VisualStudio\ToolSuiteCPP\Core\HTTP\Private\Socket.cpp(35,2): error C2146: syntax error: missing ';' before identifier 'server'
-C:\Arbeit\repos\VisualStudio\ToolSuiteCPP\Core\HTTP\Private\Socket.cpp(39,2): error C2146: syntax error: missing ';' before identifier 'memset'
-C:\Arbeit\repos\VisualStudio\ToolSuiteCPP\Core\HTTP\Private\Socket.cpp(46,3): error C3861: 'error': identifier not found
-C:\Arbeit\repos\VisualStudio\ToolSuiteCPP\Core\HTTP\Private\Socket.cpp(49,16): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Arbeit\repos\VisualStudio\ToolSuiteCPP\Core\HTTP\Private\Socket.cpp(52,11): error C3861: 'write': identifier not found
-C:\Arbeit\repos\VisualStudio\ToolSuiteCPP\Core\HTTP\Private\Socket.cpp(54,4): error C3861: 'error': identifier not found
-C:\Arbeit\repos\VisualStudio\ToolSuiteCPP\Core\HTTP\Private\Socket.cpp(65,11): error C3861: 'read': identifier not found
-C:\Arbeit\repos\VisualStudio\ToolSuiteCPP\Core\HTTP\Private\Socket.cpp(67,4): error C3861: 'error': identifier not found
-C:\Arbeit\repos\VisualStudio\ToolSuiteCPP\Core\HTTP\Private\Socket.cpp(79,3): error C3861: 'error': identifier not found
-C:\Arbeit\repos\VisualStudio\ToolSuiteCPP\Core\HTTP\Private\Socket.cpp(82,2): error C3861: 'close': identifier not found
-C:\Arbeit\repos\VisualStudio\ToolSuiteCPP\Core\HTTP\Private\Socket.cpp(27,2): error C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Arbeit\repos\VisualStudio\ToolSuiteCPP\Core\HTTP\Private\Socket.cpp(35,11): error C4996: 'gethostbyname': Use getaddrinfo() or GetAddrInfoW() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
-  Generating Code...
+﻿  Socket.cpp
+D:\Arbeit\ToolSuiteCPP\Core\HTTP\Private\Socket.cpp(74): warning C4715: 'USocket::Test': not all control paths return a value
+  ToolSuiteCPP.vcxproj -> D:\Arbeit\ToolSuiteCPP\x64\Debug\ToolSuiteCPP.exe
