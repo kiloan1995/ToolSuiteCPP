@@ -1,15 +1,75 @@
 
-
-#include <WinSock2.h> // Has to be linked in Solution->Properties->Linker->Input->AdditionalDependencies->wsock32.lib
 #include <Ws2tcpip.h>
 #include "../public/Socket.h"
 #include "../../Insights/Public/Logger.h"
 #include <iostream>
 
-struct sockaddr_in Server;
-struct fd_set FD_Readers, FD_Writers, FD_Exceptions; // File descriptors
+int32_t USocket::TestClient()
+{
+	int Result = EXIT_SUCCESS;
+	WSADATA wsa;
+	if (WSAStartup(MAKEWORD(2, 2), &wsa) < 0)
+	{
+		ULogger::Log(ELogLevel::LOG_ERROR, "WSAStartup failed");
+		WSACleanup();
+		return EXIT_FAILURE;
+	}
+	ULogger::Log("WSAStartup success");
 
-int32_t USocket::TestServer()
+	// Initialize Socket
+
+	const SOCKET Socket = socket(AF_INET, SOCK_STREAM, AF_UNSPEC);
+	if (Socket < 1)
+	{
+		ULogger::Log(ELogLevel::LOG_ERROR, "Socket call failed");
+		WSACleanup();
+		return EXIT_FAILURE;
+	}
+	ULogger::Log("Socket", Socket, "call success");
+
+	// Initialize the environment for sockaddr structure
+
+	Server.sin_family = AF_INET;
+	Server.sin_port = htons(SERVER_PORT);
+	//Server.sin_addr.s_addr = inet_addr("127.0.0.1");
+	inet_pton(AF_INET, "127.0.0.1", &(Server.sin_addr));
+	memset(&(Server.sin_zero), 0, 8);
+
+	Result = connect(Socket, (struct sockaddr*)&Server, sizeof(Server));
+	if (Result < 0)
+	{
+		ULogger::Log(ELogLevel::LOG_ERROR, "connect failed");
+		WSACleanup();
+		return EXIT_FAILURE;
+	}
+	ULogger::Log("Connected to Server");
+	char Buff[255] = { 0, };
+	recv(Socket, Buff, 255, 0); // This is a blocking call
+
+	ULogger::Log("Press Enter key to see the message received from the server");
+
+	// https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes
+	int Char;
+	do // Enter
+	{
+		Char = getchar();
+	} while (Char != VK_RETURN);
+	ULogger::Log("Now send your messages to the server:");
+
+	while (true)
+	{
+		fgets(Buff, 256, stdin); // Get string from input
+		send(Socket, Buff, 256, 0);
+		ULogger::Log("Press any key to get the responose from server...");
+		getchar();
+		recv(Socket, Buff, 256, 0);
+		ULogger::Log("Now send next message:");
+	}
+
+	ULogger::Log(Buff);
+}
+
+int32_t UServerSocket::TestServer()
 {
 	// https://www.youtube.com/watch?v=W9b9SaGXIjA&list=PLhnN2F9NiVmAMn9iGB_Rtjs3aGef3GpSm&index=2&ab_channel=VartetaLearningPlatform
 	// Remember to always call 		WSACleanup(); whenever we exit this function, stop using the socket.
@@ -125,26 +185,23 @@ int32_t USocket::TestServer()
 
 		ULogger::Log("Before select call:", FD_Readers.fd_count);
 
+		for (SOCKET& Client : Clients)
+		{
+			if (Client != 0)
+			{
+				FD_SET(Client, &FD_Readers);
+				FD_SET(Client, &FD_Exceptions);
+			}
+		}
+
+
 		// Keep waiting for new requests and process as per the request
 		Result = select(MaxFileDescriptors + 1, &FD_Readers, &FD_Writers, &FD_Exceptions, &TimeValue);
 
 		if (Result > 0) // When someone connects or communicates with a message over a dedicated connection
 		{
 			ULogger::Log("Data on port", SERVER_PORT, ", Processing now");
-			if (FD_ISSET(Socket, &FD_Exceptions))
-			{
-				ULogger::Log("There is an exception. Just get away from here.");
-			}
-
-			if (FD_ISSET(Socket, &FD_Writers))
-			{
-				ULogger::Log("Ready to write something.");
-			}
-
-			if (FD_ISSET(Socket, &FD_Readers))
-			{
-				ULogger::Log("Ready to read something. Something new came up at the port", SERVER_PORT);
-			}
+			ProcessRequest(Socket);
 		}
 		else if (Result == 0) // No connection or any communication request made OR non of the descriptors are ready
 		{
@@ -161,53 +218,59 @@ int32_t USocket::TestServer()
 	return EXIT_SUCCESS;
 }
 
-int32_t USocket::TestClient()
+void UServerSocket::ProcessRequest(SOCKET ServerSocket)
 {
-	int Result = EXIT_SUCCESS;
-	WSADATA wsa;
-	if (WSAStartup(MAKEWORD(2, 2), &wsa) < 0)
+	if (FD_ISSET(ServerSocket, &FD_Readers)) // New connection request
 	{
-		ULogger::Log(ELogLevel::LOG_ERROR, "WSAStartup failed");
-		WSACleanup();
-		return EXIT_FAILURE;
+		int Len = sizeof(struct sockaddr);
+		const SOCKET ClientSocket = accept(ServerSocket, nullptr, &Len); // created a new socket id
+		if (ClientSocket > 0)
+		{
+			Clients.push_back(ClientSocket);
+			constexpr char Msg[37] = "Got the connection done successfully";
+			constexpr int SizeOfMsg = sizeof(*Msg);
+			send(ClientSocket, Msg, SizeOfMsg, 0);
+		}
 	}
-	ULogger::Log("WSAStartup success");
-
-	// Initialize Socket
-
-	const SOCKET Socket = socket(AF_INET, SOCK_STREAM, AF_UNSPEC);
-	if (Socket < 1)
+	else
 	{
-		ULogger::Log(ELogLevel::LOG_ERROR, "Socket call failed");
-		WSACleanup();
-		return EXIT_FAILURE;
+		for (const SOCKET& Client : Clients)
+		{
+			if (FD_ISSET(Client, &FD_Readers))
+			{
+				// Got new message from the client.
+				//recv();
+				// https://www.youtube.com/watch?v=Arc8S7_-Zxw&list=PLhnN2F9NiVmAMn9iGB_Rtjs3aGef3GpSm&index=6&ab_channel=VartetaLearningPlatform
+				ProcessMessage(Client);
+			}
+		}
 	}
-	ULogger::Log("Socket", Socket, "call success");
+}
 
-	// Initialize the environment for sockaddr structure
-
-	Server.sin_family = AF_INET;
-	Server.sin_port = htons(SERVER_PORT);
-	//Server.sin_addr.s_addr = inet_addr("127.0.0.1");
-	inet_pton(AF_INET, "127.0.0.1", &(Server.sin_addr));
-	memset(&(Server.sin_zero), 0, 8);
-
-	Result = connect(Socket, (struct sockaddr*)&Server, sizeof(Server));
+void UServerSocket::ProcessMessage(SOCKET ClientSocket)
+{
+	ULogger::Log("Processing the new message for client socket:", ClientSocket);
+	char Buff[256 + 1] = { 0, };
+	const int Result = recv(ClientSocket, Buff, 256, 0);
 	if (Result < 0)
 	{
-		ULogger::Log(ELogLevel::LOG_ERROR, "connect failed");
-		WSACleanup();
-		return EXIT_FAILURE;
+		ULogger::Log("Something wrong happened... closing connection for client");
+		closesocket(ClientSocket);
+		for (SOCKET& Client : Clients)
+		{
+			if (Client == ClientSocket)
+			{
+				Client = 0;
+				break;
+			}
+		}
 	}
-	ULogger::Log("Connected to Server");
-}
-
-int32_t USocket::Init()
-{
-	return 0;
-}
-
-int32_t USocket::Quit()
-{
-	return 0;
+	else
+	{
+		ULogger::Log("Message received from client: ", Buff);
+		// Send  response to client;
+		const char Answer[23] = "Processed your request";
+		send(ClientSocket, Answer, 23, 0);
+		ULogger::Log("************************************************");
+	}
 }

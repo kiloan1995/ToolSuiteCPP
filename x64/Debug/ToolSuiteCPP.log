@@ -1,4 +1,6 @@
-﻿  Socket.cpp
-D:\Arbeit\ToolSuiteCPP\Core\HTTP\Private\Socket.cpp(131,38): warning C4244: 'argument': conversion from 'uint64_t' to 'int', possible loss of data
-D:\Arbeit\ToolSuiteCPP\Core\HTTP\Private\Socket.cpp(191): warning C4715: 'USocket::TestClient': not all control paths return a value
+﻿  URL.cpp
+D:\Arbeit\ToolSuiteCPP\Core\HTTP\Private\URL.cpp(10,37): warning C4129: '/': unrecognized character escape sequence
+D:\Arbeit\ToolSuiteCPP\Core\HTTP\Private\URL.cpp(12,43): warning C4129: '/': unrecognized character escape sequence
+D:\Arbeit\ToolSuiteCPP\Core\HTTP\Private\URL.cpp(12,43): warning C4129: 's': unrecognized character escape sequence
+D:\Arbeit\ToolSuiteCPP\Core\HTTP\Private\URL.cpp(16,44): warning C4129: ']': unrecognized character escape sequence
   ToolSuiteCPP.vcxproj -> D:\Arbeit\ToolSuiteCPP\x64\Debug\ToolSuiteCPP.exe
