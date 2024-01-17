@@ -1,6 +1,3 @@
 ﻿  URL.cpp
-D:\Arbeit\ToolSuiteCPP\Core\HTTP\Private\URL.cpp(10,37): warning C4129: '/': unrecognized character escape sequence
-D:\Arbeit\ToolSuiteCPP\Core\HTTP\Private\URL.cpp(12,43): warning C4129: '/': unrecognized character escape sequence
-D:\Arbeit\ToolSuiteCPP\Core\HTTP\Private\URL.cpp(12,43): warning C4129: 's': unrecognized character escape sequence
-D:\Arbeit\ToolSuiteCPP\Core\HTTP\Private\URL.cpp(16,44): warning C4129: ']': unrecognized character escape sequence
-  ToolSuiteCPP.vcxproj -> D:\Arbeit\ToolSuiteCPP\x64\Debug\ToolSuiteCPP.exe
+  LINK : C:\Arbeit\repos\VisualStudio\ToolSuiteCPP\x64\Debug\ToolSuiteCPP.exe not found or not built by the last incremental link; performing full link
+  ToolSuiteCPP.vcxproj -> C:\Arbeit\repos\VisualStudio\ToolSuiteCPP\x64\Debug\ToolSuiteCPP.exe

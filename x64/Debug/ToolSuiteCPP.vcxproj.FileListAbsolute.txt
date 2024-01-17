@@ -1,1 +1,2 @@
 D:\Arbeit\ToolSuiteCPP\x64\Debug\ToolSuiteCPP.exe
+C:\Arbeit\repos\VisualStudio\ToolSuiteCpp\x64\Debug\ToolSuiteCPP.exe
