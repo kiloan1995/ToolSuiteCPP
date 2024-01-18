@@ -2,6 +2,9 @@
 .vs/
 *.vsconfig
 
+#compiled folder
+.x64/
+
 # Prerequisites
 *.d
 
