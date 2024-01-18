@@ -1,5 +1,7 @@
-C:\Arbeit\repos\VisualStudio\ToolSuiteCPP\App.cpp;C:\Arbeit\repos\VisualStudio\ToolSuiteCPP\x64\Debug\App.obj
-C:\Arbeit\repos\VisualStudio\ToolSuiteCPP\Core\Core.cpp;C:\Arbeit\repos\VisualStudio\ToolSuiteCPP\x64\Debug\Core.obj
-C:\Arbeit\repos\VisualStudio\ToolSuiteCPP\Core\HTTP\Private\Socket.cpp;C:\Arbeit\repos\VisualStudio\ToolSuiteCPP\x64\Debug\Socket.obj
-C:\Arbeit\repos\VisualStudio\ToolSuiteCPP\Core\HTTP\Private\URL.cpp;C:\Arbeit\repos\VisualStudio\ToolSuiteCPP\x64\Debug\URL.obj
-C:\Arbeit\repos\VisualStudio\ToolSuiteCPP\Core\Insights\Private\Logger.cpp;C:\Arbeit\repos\VisualStudio\ToolSuiteCPP\x64\Debug\Logger.obj
+D:\Arbeit\ToolSuiteCPP\App.cpp;D:\Arbeit\ToolSuiteCPP\x64\Debug\App.obj
+D:\Arbeit\ToolSuiteCPP\Core\Core.cpp;D:\Arbeit\ToolSuiteCPP\x64\Debug\Core.obj
+D:\Arbeit\ToolSuiteCPP\Core\HAL\Private\PlatformMisc.cpp;D:\Arbeit\ToolSuiteCPP\x64\Debug\PlatformMisc.obj
+D:\Arbeit\ToolSuiteCPP\Core\HAL\Public\PlatformMisc.h;D:\Arbeit\ToolSuiteCPP\x64\Debug\PlatformMisc.h.obj
+D:\Arbeit\ToolSuiteCPP\Core\HTTP\Private\Socket.cpp;D:\Arbeit\ToolSuiteCPP\x64\Debug\Socket.obj
+D:\Arbeit\ToolSuiteCPP\Core\HTTP\Private\URL.cpp;D:\Arbeit\ToolSuiteCPP\x64\Debug\URL.obj
+D:\Arbeit\ToolSuiteCPP\Core\Insights\Private\Logger.cpp;D:\Arbeit\ToolSuiteCPP\x64\Debug\Logger.obj

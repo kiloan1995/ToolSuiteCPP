@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "x64\\Debug\\PlatformMisc.h.obj",
+            "outputs": [
+                "D:\\Arbeit\\ToolSuiteCPP\\x64\\Debug\\vc143.pdb",
+                "x64\\Debug\\",
+                "D:\\Arbeit\\ToolSuiteCPP\\x64\\Debug\\PlatformMisc.h.ifc"
+            ],
+            "provides": [
+                {
+                    "logical-name": "Core\\HAL\\Public\\PlatformMisc.h",
+                    "source-path": "d:\\arbeit\\toolsuitecpp\\core\\hal\\public\\platformmisc.h",
+                    "lookup-method": "absolute"
+                }
+            ],
+            "requires": []
+        }
+    ]
+}

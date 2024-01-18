@@ -1,3 +1,3 @@
-﻿  URL.cpp
-  LINK : C:\Arbeit\repos\VisualStudio\ToolSuiteCPP\x64\Debug\ToolSuiteCPP.exe not found or not built by the last incremental link; performing full link
-  ToolSuiteCPP.vcxproj -> C:\Arbeit\repos\VisualStudio\ToolSuiteCPP\x64\Debug\ToolSuiteCPP.exe
+﻿  Scanning sources for module dependencies...
+  PlatformMisc.cpp
+  ToolSuiteCPP.vcxproj -> D:\Arbeit\ToolSuiteCPP\x64\Debug\ToolSuiteCPP.exe

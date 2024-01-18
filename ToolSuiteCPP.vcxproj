@@ -131,6 +131,8 @@
   <ItemGroup>
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Core\Core.cpp" />
+    <ClCompile Include="Core\HAL\Private\PlatformMisc.cpp" />
+    <ClCompile Include="Core\HAL\Public\PlatformMisc.h" />
     <ClCompile Include="Core\HTTP\Private\Socket.cpp" />
     <ClCompile Include="Core\HTTP\Private\URL.cpp" />
     <ClCompile Include="Core\Insights\Private\Logger.cpp" />
