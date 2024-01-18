@@ -4,6 +4,7 @@
 #include "HTTP/Public/Socket.h"
 #include "Insights/Public/Logger.h"
 #include "HTTP/Public/URL.h"
+#include "Math/Public/Math.h"
 
 UCore::UCore()
 {
@@ -15,8 +16,5 @@ UCore::UCore()
 	ULogger::Log(URL.GetHref());
 	//USocket Socket = USocket();
 	//Socket.TestClient();
-	//FPlatformMisc::ClipBoardCopy("My Test String");
-	std::string Test;
-	FPlatformMisc::ClipBoardPaste(Test);
-	ULogger::Log(Test);
+
 }
