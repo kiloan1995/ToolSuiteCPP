@@ -21,10 +21,10 @@
     <ClCompile Include="Core\Core.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\HTTP\Private\URL.cpp">
+    <ClCompile Include="Core\Networking\Online\Private\URL.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\HTTP\Private\Socket.cpp">
+    <ClCompile Include="Core\Networking\Online\Private\Socket.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Core\Insights\Private\Logger.cpp">
@@ -34,6 +34,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Core\HAL\Private\PlatformMisc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Networking\HTTP\Private\HTTPRequest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Networking\Online\Private\OnlineService.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -53,13 +59,19 @@
     <ClInclude Include="Core\Math\Public\Vector4.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\HTTP\Public\URL.h">
+    <ClInclude Include="Core\Networking\Online\Public\URL.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\HTTP\Public\Socket.h">
+    <ClInclude Include="Core\Networking\Online\Public\Socket.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\Insights\Public\Logger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Networking\HTTP\Public\HTTPRequest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Networking\Online\Public\OnlineService.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

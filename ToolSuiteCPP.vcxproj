@@ -133,19 +133,23 @@
     <ClCompile Include="Core\Core.cpp" />
     <ClCompile Include="Core\HAL\Private\PlatformMisc.cpp" />
     <ClCompile Include="Core\HAL\Public\PlatformMisc.h" />
-    <ClCompile Include="Core\HTTP\Private\Socket.cpp" />
-    <ClCompile Include="Core\HTTP\Private\URL.cpp" />
+    <ClCompile Include="Core\Networking\HTTP\Private\HTTPRequest.cpp" />
+    <ClCompile Include="Core\Networking\Online\Private\Socket.cpp" />
+    <ClCompile Include="Core\Networking\Online\Private\URL.cpp" />
     <ClCompile Include="Core\Insights\Private\Logger.cpp" />
+    <ClCompile Include="Core\Networking\Online\Private\OnlineService.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Core.h" />
-    <ClInclude Include="Core\HTTP\Public\Socket.h" />
-    <ClInclude Include="Core\HTTP\Public\URL.h" />
+    <ClInclude Include="Core\Networking\HTTP\Public\HTTPRequest.h" />
+    <ClInclude Include="Core\Networking\Online\Public\Socket.h" />
+    <ClInclude Include="Core\Networking\Online\Public\URL.h" />
     <ClInclude Include="Core\Insights\Public\Logger.h" />
     <ClInclude Include="Core\Math\Public\Math.h" />
     <ClInclude Include="Core\Math\Public\Vector2.h" />
     <ClInclude Include="Core\Math\Public\Vector3.h" />
     <ClInclude Include="Core\Math\Public\Vector4.h" />
+    <ClInclude Include="Core\Networking\Online\Public\OnlineService.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

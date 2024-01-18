@@ -1,3 +1,4 @@
 ﻿  Scanning sources for module dependencies...
-  Core.cpp
+  Socket.cpp
+D:\Arbeit\ToolSuiteCPP\Core\Networking\Online\Private\Socket.cpp(162,57): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
   ToolSuiteCPP.vcxproj -> D:\Arbeit\ToolSuiteCPP\x64\Debug\ToolSuiteCPP.exe
